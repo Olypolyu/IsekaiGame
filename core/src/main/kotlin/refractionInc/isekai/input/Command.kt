@@ -12,8 +12,8 @@ enum class EnumCommand {
 }
 
 enum class EnumKeyState {
-    Pressed,
-    Lifted,
+    Down,
+    Up,
     Held,
 }
 
