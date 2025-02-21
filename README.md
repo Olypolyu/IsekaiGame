@@ -1,33 +1,21 @@
-# IsekaiGame#99KT
+# IsekaiGame
+The base idea about the game is to make a story driven RPG based around death. This is a game where you play a character that recently got hit by a truck (or whatever) then found himself in a generic fantasy world.
 
-A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/libgdx/gdx-liftoff).
+## story
+As the player you can talk to NPCs with multiple choice dialog to get a determinated ending. They will send you to quests or interact with you in different ways, however which, it will end with you dying and sometimes getting a item that can be used to unlock more endings. This is very inspired by kindergarten 1&2.
 
-This project was generated with a template that includes Kotlin application launchers and draws the libGDX logo within the application listener.
 
-## Platforms
+## gameplay
+Together with this, the game will feature 2d zelda styled dungeons and turn based combat based on *time*. That being, your moves cost only the time(in turns) that it takes to cast them.
 
-- `core`: Main module with the application logic shared by all platforms.
-- `lwjgl3`: Primary desktop platform using LWJGL3; was called 'desktop' in older docs.
+IE:
+You cast fireball, it takes 3 turns.
 
-## Gradle
+In turn, your enemy casts scratch that takes only 2 turns. 
 
-This project uses [Gradle](https://gradle.org/) to manage dependencies.
-The Gradle wrapper was included, so you can run Gradle tasks using `gradlew.bat` or `./gradlew` commands.
-Useful Gradle tasks and flags:
+This gives you a choice to make. One where you have a single turn available to act with a quick action, however do to so it will cost your current 3 turn action that's mid casting.
 
-- `--continue`: when using this flag, errors will not stop the tasks from running.
-- `--daemon`: thanks to this flag, Gradle daemon will be used to run chosen tasks.
-- `--offline`: when using this flag, cached dependency archives will be used.
-- `--refresh-dependencies`: this flag forces validation of all dependencies. Useful for snapshot versions.
-- `build`: builds sources and archives of every project.
-- `cleanEclipse`: removes Eclipse project data.
-- `cleanIdea`: removes IntelliJ project data.
-- `clean`: removes `build` folders, which store compiled classes and built archives.
-- `eclipse`: generates Eclipse project data.
-- `idea`: generates IntelliJ project data.
-- `lwjgl3:jar`: builds application's runnable jar, which can be found at `lwjgl3/build/libs`.
-- `lwjgl3:run`: starts the application.
-- `test`: runs unit tests (if any).
+One might choose to evade the attack or parry it by forfeiting the 3 turn fireball, likewise, one might tank the damage in a controlled manner to fire the fireball anyways.
 
-Note that most tasks that are not specific to a single project can be run with `name:` prefix, where the `name` should be replaced with the ID of a specific project.
-For example, `core:clean` removes `build` folder only from the `core` project.
+### ideas:
+- I think it'd be a cool idea to have so your moves appear in a card deck that's randomly selected from like a TCG.
