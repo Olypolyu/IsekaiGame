@@ -1,5 +1,6 @@
 package refractionInc.isekai.entity
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Vector2
 import refractionInc.isekai.world.World
 
@@ -10,6 +11,6 @@ interface Entity {
     var rotation: Float
     val size: Vector2
 
-    fun draw(screenX: Int, screenY: Int)
-    fun tick()
+    fun draw(batch: SpriteBatch, screenX:Float, screenY:Float) {}
+    fun tick() {}
 }

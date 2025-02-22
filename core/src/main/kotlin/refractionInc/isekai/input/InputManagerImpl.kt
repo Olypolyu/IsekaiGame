@@ -46,7 +46,7 @@ class InputManagerImpl : InputManager, InputAdapter() {
 
     override fun tick() {
         for ((keyCode, pressed) in keyDown.entries) {
-            if (!pressed) return
+            if (!pressed) continue
 
             val command = keyboardBindings[keyCode] ?: return
             executeCommand(Command(command, EnumKeyState.Held, 1.0f))
