@@ -1,7 +1,9 @@
 package refractionInc.isekai.entity.effect
 
-abstract class Effect(val duration:Int) {
-    abstract val name:String
-    abstract val iconPath: String
-    fun tick() {}
+interface Effect {
+    val duration: Int
+    val name: String
+    val iconPath: String
+
+    fun tick()
 }

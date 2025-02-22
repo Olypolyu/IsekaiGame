@@ -1,27 +1,19 @@
 package refractionInc.isekai
 
-import com.badlogic.gdx.ApplicationAdapter
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.InputAdapter
-import refractionInc.isekai.input.Command
-import refractionInc.isekai.input.EnumCommand
-import refractionInc.isekai.input.IInputManager
-import refractionInc.isekai.input.KMInputManager
+import com.badlogic.gdx.*
+import refractionInc.isekai.input.*
 
 /** [com.badlogic.gdx.ApplicationListener] implementation shared by all platforms. */
 object Game : ApplicationAdapter() {
-
     // replace with by lazy and a locator pattern to alternate input device specific managers.
-    val input: IInputManager = KMInputManager()
+    val input = InputManager()
 
     override fun create() {
-        Gdx.input.inputProcessor = input as InputAdapter
-        input.assumeControl(this::handleInput, this.javaClass)
-    }
-
-    fun handleInput(command: Command<Any>): Boolean{
-        println("[${command.type}] ${command.state} ${command.value}")
-        return false
+        Gdx.input.inputProcessor = input
+        input.assumeControl(this) { command ->
+            println("[${command.type}] ${command.state} ${command.value}")
+            false
+        }
     }
 
     override fun render() {
