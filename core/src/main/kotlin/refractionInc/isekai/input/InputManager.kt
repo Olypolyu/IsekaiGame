@@ -5,7 +5,7 @@ import com.badlogic.gdx.InputProcessor
 /**
  * A factory function that returns an InputManager impl
  */
-fun InputManager(): InputManager = InputManagerImpl()
+fun InputManager(): InputManager = KeyboardManager()
 
 interface InputManager : InputProcessor {
     val type: String

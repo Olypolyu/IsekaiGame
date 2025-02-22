@@ -3,7 +3,7 @@ package refractionInc.isekai.input
 import com.badlogic.gdx.Input.Keys
 import com.badlogic.gdx.InputAdapter
 
-class InputManagerImpl : InputManager, InputAdapter() {
+class KeyboardManager : InputManager, InputAdapter() {
     override val type = "keyboard"
     private val keyboardBindings = mutableMapOf<Int, EnumCommand>()
     private val controlStack = mutableListOf<Pair<Any, (Command<Any>) -> Boolean>>()
