@@ -27,7 +27,7 @@ class Level(
 
     val gridArea get() = gridSize.x * gridSize.y
 
-    fun tick() {
+    fun tick(delta: Float) {
     }
 
     fun draw(batch: SpriteBatch) {

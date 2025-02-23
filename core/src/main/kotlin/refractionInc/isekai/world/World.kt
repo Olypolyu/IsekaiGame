@@ -23,7 +23,7 @@ class World(
         val delta = Gdx.graphics.deltaTime
 
         entities.forEach { it.tick(delta) }
-        levels.forEach { it.tick() }
+        levels.forEach { it.tick(delta) }
     }
 
     fun draw(batch: SpriteBatch) {

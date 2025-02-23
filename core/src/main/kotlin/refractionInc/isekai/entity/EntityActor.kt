@@ -10,7 +10,7 @@ abstract class EntityActor(
     override val position: Vector2,
     override val speed: Vector2 = Vector2(0f, 0f),
     override var rotation: Float = 0f,
-    override val size: Vector2 = Vector2(10f, 10f)
+    override val size: Vector2 = Vector2(16f, 16f)
 ) : Entity {
     init { world.entities.add(this) }
 
@@ -21,7 +21,6 @@ abstract class EntityActor(
 
     override fun tick(delta: Float) {
         super.tick(delta)
-        println(speed)
 
         position.x += speed.x * delta
         position.y += speed.y * delta

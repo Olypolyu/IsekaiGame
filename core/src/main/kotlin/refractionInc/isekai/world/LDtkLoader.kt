@@ -31,6 +31,8 @@ fun readCSV(csv: String): List<List<Int>> {
                 lineBuffer = mutableListOf()
             }
 
+            '\r' -> {}
+
             else -> {
                 assert(char.isDigit()) {"Invalid CSV, \"$char\" is not a digit."}
                 buffer += char

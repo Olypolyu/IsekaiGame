@@ -1,14 +1,18 @@
 package refractionInc.isekai.entity
 
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.graphics.g2d.*
+import com.badlogic.gdx.graphics.g2d.Sprite
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Vector2
-import refractionInc.isekai.input.*
-import refractionInc.isekai.utils.*
+import refractionInc.isekai.input.Command
+import refractionInc.isekai.input.EnumCommand
+import refractionInc.isekai.input.EnumKeyState
+import refractionInc.isekai.utils.setPosition
+import refractionInc.isekai.utils.setSize
 import refractionInc.isekai.world.World
 
 class EntityPlayer(world: World, position: Vector2) : EntityActor(world, position) {
-    override val size = Vector2(40f, 40f)
+    override val size = Vector2(16f, 16f)
     val sprite = Sprite(Texture("ohmygotto.png"))
 
     init {
