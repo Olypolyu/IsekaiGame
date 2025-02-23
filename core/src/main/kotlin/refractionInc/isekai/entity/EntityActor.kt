@@ -2,8 +2,8 @@ package refractionInc.isekai.entity
 
 import com.badlogic.gdx.math.Vector2
 import refractionInc.isekai.entity.effect.Effect
+import refractionInc.isekai.utils.times
 import refractionInc.isekai.world.World
-import kotlin.math.abs
 
 abstract class EntityActor(
     override val world: World,
@@ -19,14 +19,22 @@ abstract class EntityActor(
     var health = maxHealth
         private set
 
-    override fun tick() {
-        super.tick()
-        position.x += speed.x
-        position.y += speed.y
-        speed.x = (abs(speed.x) -0.1f) * 0.75f * (if (speed.x < 0) -1 else 1)
-        speed.y = (abs(speed.y) -0.1f) * 0.75f * (if (speed.y < 0) -1 else 1)
+    override fun tick(delta: Float) {
+        super.tick(delta)
+        println(speed)
+
+        position.x += speed.x * delta
+        position.y += speed.y * delta
+        speed.set(speed * FRICTION)
+
+        if (speed.x in -0.0001..0.0001) speed.x = 0f
+        if (speed.y in -0.0001..0.0001) speed.y = 0f
     }
 
     open fun hurt(damage: Int, damageType: List<EnumDamageType>) {}
     open fun heal(amount: Int) {}
+
+    companion object {
+        const val FRICTION = 0.90f
+    }
 }

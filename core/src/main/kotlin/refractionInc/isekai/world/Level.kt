@@ -19,11 +19,12 @@ class Level(
 
     val fields: MutableMap<String, Any> = mutableMapOf(),
     private val entities: MutableList<Entity> = mutableListOf()
-)
-{
+) {
+
     init {
         layers.forEach { it.setPosition(globalPosition.x , globalPosition.y) }
     }
+
     val gridArea get() = gridSize.x * gridSize.y
 
     fun tick() {
