@@ -11,6 +11,6 @@ interface Entity {
     var rotation: Float
     val size: Vector2
 
-    fun draw(batch: SpriteBatch, screenX:Float, screenY:Float) {}
+    fun draw(batch: SpriteBatch) {}
     fun tick() {}
 }

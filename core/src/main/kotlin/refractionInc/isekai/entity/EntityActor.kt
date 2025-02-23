@@ -12,6 +12,11 @@ abstract class EntityActor(
     override var rotation: Float = 0f,
     override val size: Vector2 = Vector2(10f, 10f)
 ) : Entity {
+
+    init {
+        world.entities.add(this)
+    }
+
     val effects = mutableListOf<Effect>()
     val maxHealth = 20
     var health = maxHealth
