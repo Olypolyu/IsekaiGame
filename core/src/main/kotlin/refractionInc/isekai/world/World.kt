@@ -1,11 +1,9 @@
 package refractionInc.isekai.world
 
-import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Vector2
 import refractionInc.isekai.Game
-import refractionInc.isekai.entity.Entity
-import refractionInc.isekai.entity.EntityPlayer
+import refractionInc.isekai.entity.*
 
 class World(
     val levels: List<Level>,
@@ -19,16 +17,14 @@ class World(
         Game.cameraFollow = player
     }
 
-    fun tick() {
-        val delta = Gdx.graphics.deltaTime
-
+    fun tick(delta: Float) {
         entities.forEach { it.tick(delta) }
         levels.forEach { it.tick() }
     }
 
-    fun draw(batch: SpriteBatch) {
+    fun draw(batch: SpriteBatch, delta: Float) {
         levels.forEach { it.draw(batch) }
-        entities.forEach { it.draw(batch) }
+        entities.forEach { it.draw(batch, delta) }
     }
 
 }

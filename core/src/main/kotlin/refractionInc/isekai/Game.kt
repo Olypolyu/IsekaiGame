@@ -33,7 +33,6 @@ object Game : ApplicationAdapter() {
     var cameraFollow: Entity? = null
 
 // </ render >
-
     override fun create() {
         Gdx.input.inputProcessor = input
 
@@ -51,16 +50,18 @@ object Game : ApplicationAdapter() {
     }
 
     override fun render() {
-        tick()
-        draw()
+        val delta = Gdx.graphics.deltaTime
+
+        tick(delta)
+        draw(delta)
     }
 
-    fun tick() {
+    fun tick(delta: Float) {
         input.tick()
-        world.tick()
+        world.tick(delta)
     }
 
-    fun draw() {
+    fun draw(delta: Float) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
 
         cameraFollow?.let {
@@ -77,7 +78,7 @@ object Game : ApplicationAdapter() {
         camera.update()
         spriteBatch.projectionMatrix = camera.combined
         spriteBatch.use {
-            world.draw(it)
+            world.draw(it, delta)
         }
 
         guiBatch.use {
