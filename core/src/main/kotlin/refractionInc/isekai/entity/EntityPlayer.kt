@@ -14,6 +14,7 @@ import refractionInc.isekai.world.World
 class EntityPlayer(world: World, position: Vector2) : EntityActor(world, position) {
     override val size = Vector2(16f, 16f)
     val sprite = Sprite(Texture("ohmygotto.png"))
+//    private var elapsed = 0f
 
     init {
         sprite.setSize(size)
@@ -35,6 +36,7 @@ class EntityPlayer(world: World, position: Vector2) : EntityActor(world, positio
     }
 
     override fun tick(delta: Float) {
+//        elapsed = 0f
 //        val (x, y) = position + speed
 //        if (x > world.size.x - size.x) speed.x = lerp(speed.x, x - (world.size.x + size.x), delta)
 //        if (y > world.size.x - size.x) speed.y = lerp(speed.x, x - (world.size.x + size.x), delta)
@@ -46,7 +48,7 @@ class EntityPlayer(world: World, position: Vector2) : EntityActor(world, positio
         super.tick(delta)
     }
 
-    override fun draw(batch: SpriteBatch) {
+    override fun draw(batch: SpriteBatch, delta: Float) {
         sprite.setPosition(position)
         sprite.draw(batch)
     }

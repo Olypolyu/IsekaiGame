@@ -34,6 +34,6 @@ abstract class EntityActor(
     open fun heal(amount: Int) {}
 
     companion object {
-        const val FRICTION = 0.90f
+        const val FRICTION = 0.75f
     }
 }
