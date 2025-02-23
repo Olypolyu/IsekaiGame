@@ -1,5 +1,6 @@
 package refractionInc.isekai.world
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Vector2
@@ -11,9 +12,9 @@ class World(
     val layers: List<Sprite>,
     val size: Vector2,
 ) {
-
     val entities: MutableList<Entity> = mutableListOf()
     val player by lazy { EntityPlayer(this, Vector2(0f, 0f)) }
+
     init {
         Game.input.assumeControl(player, player::handleInput)
         Game.cameraFollow = player
@@ -22,7 +23,9 @@ class World(
     }
 
     fun tick() {
-        entities.forEach { it.tick() }
+        val delta = Gdx.graphics.deltaTime
+
+        entities.forEach { it.tick(delta) }
     }
 
     fun draw(batch: SpriteBatch) {

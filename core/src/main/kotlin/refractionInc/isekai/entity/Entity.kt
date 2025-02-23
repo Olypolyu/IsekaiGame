@@ -12,5 +12,5 @@ interface Entity {
     val size: Vector2
 
     fun draw(batch: SpriteBatch) {}
-    fun tick() {}
+    fun tick(delta: Float) {}
 }

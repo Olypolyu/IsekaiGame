@@ -1,21 +1,16 @@
 package refractionInc.isekai
 
-import com.badlogic.gdx.ApplicationAdapter
-import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.*
 import com.badlogic.gdx.assets.AssetManager
-import com.badlogic.gdx.graphics.GL20
-import com.badlogic.gdx.graphics.OrthographicCamera
-import com.badlogic.gdx.graphics.g2d.BitmapFont
-import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.graphics.*
+import com.badlogic.gdx.graphics.g2d.*
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.viewport.FitViewport
 import refractionInc.isekai.entity.Entity
 import refractionInc.isekai.input.InputManager
-import refractionInc.isekai.utils.use
-import refractionInc.isekai.utils.viewportSize
+import refractionInc.isekai.utils.*
 import refractionInc.isekai.world.LDtkLoadSimpleWorld
-import kotlin.math.max
-import kotlin.math.min
+import kotlin.math.*
 
 /** [com.badlogic.gdx.ApplicationListener] implementation shared by all platforms. */
 object Game : ApplicationAdapter() {
@@ -42,7 +37,7 @@ object Game : ApplicationAdapter() {
         Gdx.input.inputProcessor = input
 
         camera.viewportSize = screenSize
-        camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0f);
+        camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0f)
         viewport.update(screenSize.x.toInt(), screenSize.y.toInt())
     }
 
@@ -65,15 +60,15 @@ object Game : ApplicationAdapter() {
     }
 
     fun draw() {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
 
-        cameraFollow?.run {
-            val followPosition = cameraFollow?.position?.cpy() ?: return@run
+        cameraFollow?.let {
+            val followPosition = it.position.cpy() ?: return@let
 
             followPosition.y = max(followPosition.y, camera.viewportHeight/2)
-            followPosition.y = min(followPosition.y,world.size.y - (camera.viewportHeight/2))
+            followPosition.y = min(followPosition.y, world.size.y - (camera.viewportHeight/2))
             followPosition.x = max(followPosition.x, camera.viewportWidth/2)
-            followPosition.x = min(followPosition.x,world.size.x - (camera.viewportWidth/2))
+            followPosition.x = min(followPosition.x, world.size.x - (camera.viewportWidth/2))
 
             camera.position.set(followPosition, 0f)
         }
@@ -81,11 +76,11 @@ object Game : ApplicationAdapter() {
         camera.update()
         spriteBatch.projectionMatrix = camera.combined
         spriteBatch.use {
-            world.draw(this)
+            world.draw(it)
         }
 
         guiBatch.use {
-            font.draw(this, "Hello!", 5f, 15f)
+            font.draw(it, "Hello!", 5f, 15f)
         }
     }
 }
