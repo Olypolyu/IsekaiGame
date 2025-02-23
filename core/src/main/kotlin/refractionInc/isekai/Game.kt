@@ -1,21 +1,28 @@
 package refractionInc.isekai
 
-import com.badlogic.gdx.*
+import com.badlogic.gdx.ApplicationAdapter
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.assets.AssetManager
-import com.badlogic.gdx.graphics.*
-import com.badlogic.gdx.graphics.g2d.*
+import com.badlogic.gdx.graphics.GL20
+import com.badlogic.gdx.graphics.OrthographicCamera
+import com.badlogic.gdx.graphics.g2d.BitmapFont
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.viewport.FitViewport
 import refractionInc.isekai.entity.Entity
 import refractionInc.isekai.input.InputManager
-import refractionInc.isekai.utils.*
+import refractionInc.isekai.utils.use
+import refractionInc.isekai.utils.viewportSize
 import refractionInc.isekai.world.LDtkLoadSimpleWorld
-import kotlin.math.*
+import kotlin.math.max
+import kotlin.math.min
 
 /** [com.badlogic.gdx.ApplicationListener] implementation shared by all platforms. */
 object Game : ApplicationAdapter() {
 
     val viewDistance = 1.5f
+    val isDebug = true
+
 // < systems >
     val assetManager = AssetManager()
     val input = InputManager()
@@ -50,7 +57,7 @@ object Game : ApplicationAdapter() {
     }
 
     override fun render() {
-        val delta = Gdx.graphics.deltaTime
+        val delta = min(Gdx.graphics.deltaTime,  0.25f)
 
         tick(delta)
         draw(delta)
@@ -82,7 +89,8 @@ object Game : ApplicationAdapter() {
         }
 
         guiBatch.use {
-            font.draw(it, "Hello!", 5f, 15f)
+            font.draw(it, "${world.player.collision.linearVelocity}", 5f, 15f)
+            font.draw(it, "${world.player.collision.position}", 5f, 30f)
         }
     }
 }

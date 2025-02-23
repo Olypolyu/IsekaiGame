@@ -27,7 +27,7 @@ fun readCSV(csv: String): List<List<Int>> {
                     buffer = ""
                 }
 
-                columnBuffer.add(lineBuffer)
+                columnBuffer.addLast(lineBuffer)
                 lineBuffer = mutableListOf()
             }
 
