@@ -7,40 +7,43 @@ import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.viewport.FitViewport
 import refractionInc.isekai.entity.Entity
 import refractionInc.isekai.input.InputManager
-import refractionInc.isekai.utils.screenSize
+import refractionInc.isekai.utils.use
 import refractionInc.isekai.utils.viewportSize
-import refractionInc.isekai.world.World
+import refractionInc.isekai.world.LDtkLoadSimpleWorld
 import kotlin.math.max
 import kotlin.math.min
 
 /** [com.badlogic.gdx.ApplicationListener] implementation shared by all platforms. */
 object Game : ApplicationAdapter() {
+
+// < systems >
     val assetManager = AssetManager()
-
-    // replace with by lazy and a locator pattern to alternate input device specific managers.
     val input = InputManager()
+    val camera by lazy { OrthographicCamera() }
+    val viewport by lazy { FitViewport(16f*16f, 9f*16f, camera) }
+    val world by lazy { LDtkLoadSimpleWorld("level/Typical_TopDown_example/simplified") }
+// </ systems >
 
+// < render >
+    val screenSize get() = Vector2(Gdx.graphics.width.toFloat(), Gdx.graphics.height.toFloat())
     private val spriteBatch: SpriteBatch by lazy {SpriteBatch()}
     private val guiBatch by lazy { SpriteBatch() }
 
     val font by lazy { BitmapFont() }
-
-    val world by lazy { World() }
-
     var cameraFollow: Entity? = null
-    val camera by lazy { OrthographicCamera() }
 
-    val viewport by lazy { FitViewport(screenSize.x, screenSize.y, camera) }
+// </ render >
 
     override fun create() {
         Gdx.input.inputProcessor = input
 
-        viewport.update(screenSize.x.toInt(), screenSize.y.toInt())
         camera.viewportSize = screenSize
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0f);
+        viewport.update(screenSize.x.toInt(), screenSize.y.toInt())
     }
 
     override fun resize(width: Int, height: Int) {
@@ -48,7 +51,6 @@ object Game : ApplicationAdapter() {
 
         camera.viewportSize = screenSize
         cameraFollow ?: camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0f)
-
         viewport.update(width, height)
     }
 
@@ -78,10 +80,12 @@ object Game : ApplicationAdapter() {
 
         camera.update()
         spriteBatch.projectionMatrix = camera.combined
+        spriteBatch.use {
+            world.draw(this)
+        }
 
-        spriteBatch.begin()
-        world.draw(spriteBatch)
-        spriteBatch.end()
-
+        guiBatch.use {
+            font.draw(this, "Hello!", 5f, 15f)
+        }
     }
 }

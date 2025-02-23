@@ -14,7 +14,7 @@ import refractionInc.isekai.world.World
 
 class EntityPlayer(world: World, position: Vector2) : EntityActor(world, position) {
 
-    override val size = Vector2(40f, 40f)
+    override val size = Vector2(16f, 16f)
     val sprite = Sprite(Texture("ohmygotto.png"))
 
     init {

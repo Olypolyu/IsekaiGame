@@ -1,8 +1,8 @@
 package refractionInc.isekai.utils
 
-import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Camera
 import com.badlogic.gdx.graphics.g2d.Sprite
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType
 import com.badlogic.gdx.math.Vector2
@@ -26,4 +26,8 @@ var Camera.viewportSize: Vector2
     set(size: Vector2) {viewportWidth = size.x; viewportHeight = size.y}
     get() = Vector2(viewportWidth, viewportHeight)
 
-val screenSize get() = Vector2(Gdx.graphics.width.toFloat(), Gdx.graphics.height.toFloat())
+fun SpriteBatch.use(render: SpriteBatch.() -> Unit) {
+    begin()
+    render()
+    end()
+}
