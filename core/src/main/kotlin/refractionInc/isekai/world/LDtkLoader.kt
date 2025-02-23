@@ -41,7 +41,7 @@ fun readCSV(csv: String): List<List<Int>> {
 }
 
 fun LDtkLoadSimpleWorld(internalPath: String) : World {
-    val worldDir = fileTree.get("level/Typical_TopDown_example/simplified")
+    val worldDir = fileTree.get("$internalPath/simplified")
     val levels: MutableList<Level> = mutableListOf()
 
     for (levelDir in worldDir.children) {
@@ -49,26 +49,31 @@ fun LDtkLoadSimpleWorld(internalPath: String) : World {
         val levelData = JsonReader().parse(levelDir.get("data.json").file.read())
 
         levelData.apply {
-            val size = Vector2(getFloat("width"), levelData.getFloat("height"))
-            val position = Vector2(getFloat("x"), getFloat("y"))
-            val identifier = getString("identifier")
-            val uid = getString("uniqueIdentifer")
-
             val bgColorStr = getString("bgColor")
-            val bgColor = Color(
-                bgColorStr.substring(1,3).toInt(16) /255f,
-                bgColorStr.substring(3,5).toInt(16) /255f,
-                bgColorStr.substring(5,7).toInt(16) /255f,
-                1f
-            )
 
-            println(bgColor)
-            val layers = get("layers").map { Sprite(Texture(levelDir.get(it.asString()).path)) }
+            levels.add(
+                Level(
+                    uid = getString("uniqueIdentifer"),
+                    identifier = getString("identifier"),
+
+                    globalPosition = Vector2(getFloat("x"), getFloat("y")),
+                    gridSize = Vector2(getFloat("width"), getFloat("height")),
+                    bgColor = Color(
+                        bgColorStr.substring(1,3).toInt(16) /255f,
+                        bgColorStr.substring(3,5).toInt(16) /255f,
+                        bgColorStr.substring(5,7).toInt(16) /255f,
+                        1f
+                    ),
+                    neighbours = get("neighbourLevels").associate { it.get("dir").asChar() to it.get("levelIid").asString() },
+                    layers = get("layers").map { Sprite(Texture(levelDir.get(it.asString()).path)) },
+                    collisionGrid = collision,
+                )
+            )
         }
     }
 
     return World(
-        mutableListOf(),
-        Vector2(0f, 0f)
+        levels = levels,
+        size = Vector2(1000f, 500f)
     )
 }

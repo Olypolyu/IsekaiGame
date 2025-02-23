@@ -2,6 +2,7 @@ package refractionInc.isekai.world
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Sprite
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Vector2
 import refractionInc.isekai.entity.Entity
 
@@ -20,5 +21,15 @@ class Level(
     private val entities: MutableList<Entity> = mutableListOf()
 )
 {
+    init {
+        layers.forEach { it.setPosition(globalPosition.x , globalPosition.y) }
+    }
     val gridArea get() = gridSize.x * gridSize.y
+
+    fun tick() {
+    }
+
+    fun draw(batch: SpriteBatch) {
+        layers.forEach { it.draw(batch) }
+    }
 }

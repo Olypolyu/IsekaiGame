@@ -19,7 +19,7 @@
 		"Collisions.png",
 		"Wall_tops.png"
 	],
-	"entities": {
+	  "entities": {
 		"Door": [
 			{
 				"id": "Door",

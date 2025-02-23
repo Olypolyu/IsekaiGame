@@ -20,12 +20,13 @@ import kotlin.math.min
 /** [com.badlogic.gdx.ApplicationListener] implementation shared by all platforms. */
 object Game : ApplicationAdapter() {
 
+    val viewDistance = 1.5f
 // < systems >
     val assetManager = AssetManager()
     val input = InputManager()
     val camera by lazy { OrthographicCamera() }
-    val viewport by lazy { FitViewport(16f*16f, 9f*16f, camera) }
-    val world by lazy { LDtkLoadSimpleWorld("level/Typical_TopDown_example/simplified") }
+    val viewport by lazy { FitViewport(16f*16f * viewDistance, 9f*16f * viewDistance, camera) }
+    val world by lazy { LDtkLoadSimpleWorld("level/Typical_TopDown_example") }
 // </ systems >
 
 // < render >
