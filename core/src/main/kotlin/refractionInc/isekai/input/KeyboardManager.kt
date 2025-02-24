@@ -30,6 +30,7 @@ class KeyboardManager : InputManager, InputAdapter() {
         keyboardBindings[Keys.D] = EnumCommand.MoveEast
         keyboardBindings[Keys.P] = EnumCommand.Hit
         keyboardBindings[Keys.TAB] = EnumCommand.Tab
+        keyboardBindings[Keys.F3] = EnumCommand.OpenDebugInfo
     }
 
     override fun captureBindingForCommand(command: EnumCommand) {

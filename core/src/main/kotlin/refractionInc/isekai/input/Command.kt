@@ -8,6 +8,7 @@ enum class EnumCommand {
     Hit,
     Interact,
     OpenMainMenu,
+    OpenDebugInfo,
     Tab
 }
 
